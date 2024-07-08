@@ -1,271 +1,35 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Quiz do Amor</title>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #ffe6e6; /* Cor de fundo suave */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-      }
-
-      h1 {
-        font-size: 2.5em;
-        color: #d82e77; /* Cor do título */
-        text-align: center;
-      }
-
-      .question {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .options {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .option {
-        background-color: #d82e77; /* Cor das opções */
-        color: #fff; /* Cor do texto das opções */
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        text-align: center;
-      }
-
-      .option:hover {
-        background-color: #ff6596; /* Cor quando passa o mouse por cima */
-      }
-
-      #result {
-        display: none;
-      }
-
-      #message {
-        font-size: 1.2em;
-        color: #d82e77; /* Cor do resultado */
-        text-align: center;
-        margin-top: 20px;
-      }
-
-      #video {
-        display: none;
-        margin-top: 20px;
-      }
-
-      #retryButton {
-        background-color: #d82e77;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        font-size: 1.2em;
-        margin-top: 20px;
-      }
-
-      #retryButton:hover {
-        background-color: #ff6596; /* Cor quando passa o mouse por cima */
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Quiz do Amor</h1>
-    <div id="question1" class="question" style="display: block">
-      <h2>Pergunta 1: Quando voltamos a conversar?</h2>
-      <div class="options">
-        <div class="option" onclick="checkAnswer(1, 0)">23/12/2021</div>
-        <div class="option" onclick="checkAnswer(1, 0)">26/12/2021</div>
-        <div class="option" onclick="checkAnswer(1, 0)">25/12/2021</div>
-        <div class="option" onclick="checkAnswer(1, 1)">24/12/2021</div>
-      </div>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite Especial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-title">
+        <h1>Convite do Amor</h1>
     </div>
-    <!-- Pergunta 2 -->
-    <div id="question2" class="question" style="display: none">
-      <h2>Pergunta 2: Qual foi o dia do nosso primeiro beijo?</h2>
-      <div class="options">
-        <div class="option" onclick="checkAnswer(2, 1)">07/07/2023</div>
-        <div class="option" onclick="checkAnswer(2, 0)">08/07/2023</div>
-        <div class="option" onclick="checkAnswer(2, 0)">06/07/2023</div>
-        <div class="option" onclick="checkAnswer(2, 0)">09/07/2023</div>
-      </div>
+    <div class="question" id="question">
+        <h2>Quer sair comigo?</h2>
+        <button id="yesButton" onclick="showOptions()">Sim</button>
+        <button id="noButton" onmouseover="moveNoButton()">Não</button>
     </div>
-
-    <!-- Pergunta 3 -->
-    <div id="question3" class="question" style="display: none">
-      <h2>
-        Pergunta 3: Qual era a Banda que estava tocando no nosso primeiro beijo?
-      </h2>
-      <div class="options">
-        <div class="option" onclick="checkAnswer(3, 1)">Racionais</div>
-        <div class="option" onclick="checkAnswer(3, 0)">Irracionais</div>
-        <div class="option" onclick="checkAnswer(3, 0)">Belo</div>
-        <div class="option" onclick="checkAnswer(3, 0)">O Rappa</div>
-      </div>
+    <div class="options" id="options" style="display: none;">
+        <h2>Escolha o que vamos fazer:</h2>
+        <ul>
+            <li><button onclick="selectOption('Ir ao parque')">Ir ao parque</button></li>
+            <li><button onclick="selectOption('Andar pela Paulista e comer algo')">Andar pela Paulista e comer algo</button></li>
+            <li><button onclick="selectOption('Conhecer um restaurante')">Conhecer um restaurante</button></li>
+            <li><button onclick="selectOption('Cinema mais comidinha')">Cinema mais comidinha</button></li>
+            <li><button onclick="selectOption('Barzinho')">Barzinho</button></li>
+            <li><button onclick="selectOption('Role Intelectual')">Role Intelectual (Conhecer algum museu)</button></li>
+            <li>
+                <input type="text" id="customOption" placeholder="Digite outra opção">
+                <button onclick="selectCustomOption()">Escolher</button>
+            </li>
+        </ul>
     </div>
-
-    <!-- Pergunta 4 -->
-    <div id="question4" class="question" style="display: none">
-      <h2>Pergunta 4: O que mais comemos juntos?</h2>
-      <div class="options">
-        <div class="option" onclick="checkAnswer(4, 0)">Pizza</div>
-        <div class="option" onclick="checkAnswer(4, 1)">Hamburguer</div>
-        <div class="option" onclick="checkAnswer(4, 0)">Comida de gente</div>
-        <div class="option" onclick="checkAnswer(4, 0)">Macarrão</div>
-      </div>
-    </div>
-
-    <!-- Repita a estrutura acima para as outras perguntas -->
-
-    <div id="result" style="display: none">
-      <h2>Resultado</h2>
-      <div id="message"></div>
-      <div id="video" style="display: none">
-        <video width="640" height="360" controls>
-          <source src="/video2.mp4" type="video/mp4" />
-          Seu navegador não suporta o elemento de vídeo.
-        </video>
-      </div>
-      <button id="retryButton" onclick="retryQuiz()">Tente Novamente</button>
-    </div>
-
-    <script>
-      // Definir variáveis
-      let currentQuestion = 1;
-      let score = 0;
-
-      function checkAnswer(question, option) {
-        // Lógica específica para cada pergunta
-        if (question === 1) {
-          if (option === 1) {
-            score++;
-          } else {
-            showIncorrectMessage();
-            return;
-          }
-        } else if (question === 2) {
-          if (option === 1) {
-            score++;
-          } else {
-            showIncorrectMessage();
-            return;
-          }
-        } else if (question === 3) {
-          if (option === 1) {
-            score++;
-          } else {
-            showIncorrectMessage();
-            return;
-          }
-        } else if (question === 4) {
-          if (option === 1) {
-            score++;
-          } else {
-            showIncorrectMessage();
-            return;
-          }
-        }
-
-        // Desativar cliques nas opções após a resposta
-        const options = document.querySelectorAll(
-          `#question${question} .option`
-        );
-        options.forEach((el, index) => {
-          el.style.pointerEvents = "none";
-          if (index !== option) {
-            el.style.backgroundColor = "red";
-          }
-        });
-
-        // Avançar para a próxima pergunta ou mostrar resultado
-        setTimeout(nextQuestion, 1000);
-      }
-
-      function showIncorrectMessage() {
-        const result = document.getElementById("result");
-        const message = document.getElementById("message");
-        const retryButton = document.getElementById("retryButton");
-
-        message.innerText =
-          "Tente novamente. O Seu amor ficou bravo pois você errou uma questão importante =(";
-        retryButton.style.display = "block";
-
-        result.style.display = "block";
-      }
-
-      // Função para avançar para a próxima pergunta
-      function nextQuestion() {
-        if (currentQuestion < 4) {
-          currentQuestion++;
-          showQuestion(currentQuestion);
-        } else {
-          showResult();
-        }
-      }
-
-      function showQuestion(question) {
-        const questions = document.querySelectorAll(".question"); // Selecionar todas as perguntas
-        questions.forEach((q) => {
-          q.style.display = "none"; // Ocultar todas as perguntas
-        });
-        document.getElementById(`question${question}`).style.display = "block"; // Exibir a próxima pergunta
-        currentQuestion = question; // Atualizar a pergunta atual
-      }
-
-      // Função para mostrar o resultado
-      function showResult() {
-        const result = document.getElementById("result");
-        const message = document.getElementById("message");
-        const video = document.getElementById("video");
-        const retryButton = document.getElementById("retryButton");
-
-        if (score === 4) {
-          message.innerHTML =
-            "Parabéns! Você acertou todas as perguntas!<br>Eu te amo muito e você é uma pessoa muito importante que eu quero ter ao meu lado para sempre!";
-          video.style.display = "block"; // Mostrar o vídeo
-        }
-        result.style.display = "block";
-      }
-
-      function retryQuiz() {
-        currentQuestion = 1;
-        score = 0;
-
-        // Pausar o vídeo, se estiver reproduzindo
-        const video = document.querySelector("video");
-        if (!video.paused) {
-          video.pause();
-        }
-
-        // Resetar cores e cliques nas opções
-        const options = document.querySelectorAll(".option");
-        options.forEach((el) => {
-          el.style.backgroundColor = "";
-          el.style.pointerEvents = "auto";
-        });
-
-        for (let i = 2; i <= 4; i++) {
-          document.getElementById(`question${i}`).style.display = "none";
-        }
-
-        showQuestion(1);
-        document.getElementById("result").style.display = "none";
-      }
-    </script>
-  </body>
+    <script src="scripts.js"></script>
+</body>
 </html>

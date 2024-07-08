@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="result">
+        <h1>Vamos fazer:</h1>
+        <p id="chosenOption"></p>
+        <h2>Agora avise o Guilherme no WhatsApp dizendo a opção que você escolheu e que dia você quer ver ele.</h2>
+        <p class="cuteMessage">Tô com saudades, gatinha!</p>
+        <button onclick="goBack()">Voltar</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const chosenOption = localStorage.getItem('selectedOption');
+            document.getElementById('chosenOption').innerText = chosenOption ? chosenOption : 'Nenhuma opção selecionada.';
+        });
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
